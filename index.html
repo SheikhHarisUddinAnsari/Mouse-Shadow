@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mouse Shadow</title>
+  </head>
+  <body>
+    <div class="hero">
+      <h1 contenteditable>🔥I trust you!</h1>
+    </div>
+
+    <style>
+      html {
+        color: black;
+        font-family: sans-serif;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+      }
+
+      h1 {
+        text-shadow: 10px 10px 0 rgba(0, 0, 0, 1);
+        font-size: 100px;
+      }
+    </style>
+
+    <script>
+      const entireScreen = document.querySelector(".hero");
+      const text = document.querySelector("h1");
+      const shadow = 200;
+
+      // this function displays the shadow of text on mousemove
+      function displayShadow(e) {
+        let width = entireScreen.offsetWidth;
+        let height = entireScreen.offsetHeight;
+
+        let x = e.offsetX;
+        let y = e.offsetY;
+
+        if (e.target == text) {
+          x = x + e.target.offsetLeft;
+          y = y + e.target.offsetTop;
+        }
+
+        shadowX = Math.round((x / width) * shadow - shadow / 2);
+        shadowY = Math.round((y / height) * shadow - shadow / 2);
+
+        text.style.textShadow = `${shadowX}px ${shadowY}px 0 red ,
+        ${2 - shadowX}px ${2 - shadowY}px 0 blue `;
+      }
+
+      entireScreen.addEventListener("mousemove", displayShadow);
+    </script>
+  </body>
+</html>
